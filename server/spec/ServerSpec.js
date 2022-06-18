@@ -1,6 +1,6 @@
-var handler = require('../request-handler');
 var expect = require('chai').expect;
 var stubs = require('./Stubs');
+var handler = require('../request-handler');
 
 describe('Node Server Request Listener Function', function() {
   it('Should answer GET requests for /classes/messages with a 200 status code', function() {
@@ -10,7 +10,7 @@ describe('Node Server Request Listener Function', function() {
     var res = new stubs.response();
 
     handler.requestHandler(req, res);
-
+    console.log('1:', {req, res});
     expect(res._responseCode).to.equal(200);
     expect(res._ended).to.equal(true);
   });
@@ -20,7 +20,7 @@ describe('Node Server Request Listener Function', function() {
     var res = new stubs.response();
 
     handler.requestHandler(req, res);
-
+    console.log('2', {req, res});
     expect(JSON.parse.bind(this, res._data)).to.not.throw();
     expect(res._ended).to.equal(true);
   });
@@ -30,6 +30,7 @@ describe('Node Server Request Listener Function', function() {
     var res = new stubs.response();
 
     handler.requestHandler(req, res);
+    console.log('3', {req, res});
 
     var parsedBody = JSON.parse(res._data);
     expect(parsedBody).to.be.an('array');
@@ -45,6 +46,7 @@ describe('Node Server Request Listener Function', function() {
     var res = new stubs.response();
 
     handler.requestHandler(req, res);
+    console.log('4', {req, res});
 
     // Expect 201 Created response status
     expect(res._responseCode).to.equal(201);
