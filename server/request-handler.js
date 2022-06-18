@@ -73,7 +73,6 @@ var requestHandler = function(request, response) {
         var message = JSON.parse(body);
         new Date();
         message.messageID = Date.now();
-        console.log('this is the message', message);
         _data.unshift(message);
         response.writeHead(statusCode, headers);
         response.end(JSON.stringify(body));
